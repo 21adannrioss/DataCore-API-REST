@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Permet accedir a fitxers i directoris que existeixin directament
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirigeix totes les peticions al index.php (enrutador principal)
+RewriteRule ^(.*)$ index.php [QSA,L]

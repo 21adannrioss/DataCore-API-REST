@@ -23,8 +23,8 @@ API REST desarrollada en **PHP** con **PostgreSQL** que implementa un CRUD bási
 ## Ejecución
 
 ```bash
-git clone https://github.com/tu-usuario/datacore.git
-cd datacore
+git clone https://github.com/21adannrioss/DataCore-API-REST.git
+cd DataCore-API-REST
 
 psql -U postgres -c "CREATE DATABASE datacore;"
 psql -U postgres -d datacore -f database/schema.sql
