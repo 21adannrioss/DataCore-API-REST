@@ -1,0 +1,12 @@
+# Variables d'entorn (dades sensibles)
+.env
+
+# Dependències de Composer (si s'afegeixen en el futur)
+/vendor/
+
+# Fitxers del sistema operatiu
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
