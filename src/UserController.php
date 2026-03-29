@@ -102,4 +102,40 @@ class UserController {
             Response::serverError('Error en actualitzar l\'usuari: ' . $e->getMessage());
         }
     }
+
+    /**
+     * Gestiona la petició DELETE /users/{id}
+     * Elimina un usuari de la base de dades pel seu ID.
+     *
+     * @param int $id Identificador de l'usuari a eliminar.
+     * @return void
+     */
+    public function destroy(int $id): void {
+        if (!Validator::isPositiveInt($id)) Response::error('L\'ID ha de ser un número enter positiu.', 422);
+
+        try {
+            $deleted = $this->model->delete($id);
+            if (!$deleted) {
+                Response::notFound("No s'ha trobat cap usuari amb ID $id.");
+            }
+            Response::success(null, 200, "Usuari amb ID $id eliminat correctament");
+        } catch (Exception $e) {
+            Response::serverError('Error en eliminar l\'usuari: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Llegeix i descodifica el cos de la petició HTTP com a JSON.
+     * Si el cos no és un JSON vàlid, retorna un error 400.
+     *
+     * @return array Les dades descodificades del cos.
+     */
+    private function getJsonBody(): array {
+        $body = file_get_contents('php://input');
+        $data = json_decode($body, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) Response::error('El cos de la petició ha de ser un JSON vàlid.', 400);
+
+        return $data ?? [];
+    }
 }
